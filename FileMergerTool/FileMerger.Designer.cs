@@ -1,4 +1,6 @@
-﻿namespace FileMergerTool
+﻿using FileMergerTool.CustomControls;
+
+namespace FileMergerTool
 {
     partial class FileMerger
     {
@@ -41,10 +43,11 @@
             gbxSummary = new GroupBox();
             txtSummary = new TextBox();
             gbxFilePath = new GroupBox();
-            clstFilePath = new CheckedListBox();
+            clstFilePath = new CustomCheckedListBox();
             gbxFilesContent = new GroupBox();
             btnClearSelect = new Button();
-            btnCopyAll = new Button();
+            btnCopyIntoClipboard = new Button();
+            btnSelectAll = new Button();
             ((System.ComponentModel.ISupportInitialize)splMain).BeginInit();
             splMain.Panel1.SuspendLayout();
             splMain.Panel2.SuspendLayout();
@@ -71,11 +74,11 @@
             // btnImportFiles
             // 
             btnImportFiles.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnImportFiles.Location = new Point(455, 61);
+            btnImportFiles.Location = new Point(391, 61);
             btnImportFiles.Name = "btnImportFiles";
-            btnImportFiles.Size = new Size(75, 55);
+            btnImportFiles.Size = new Size(142, 22);
             btnImportFiles.TabIndex = 1;
-            btnImportFiles.Text = "Import\r\nFiles";
+            btnImportFiles.Text = "Import Files";
             btnImportFiles.UseVisualStyleBackColor = true;
             btnImportFiles.Click += BtnImportFiles_Click;
             // 
@@ -96,16 +99,16 @@
             rtxIgnore.Dock = DockStyle.Fill;
             rtxIgnore.Location = new Point(3, 19);
             rtxIgnore.Name = "rtxIgnore";
-            rtxIgnore.Size = new Size(191, 61);
+            rtxIgnore.Size = new Size(161, 61);
             rtxIgnore.TabIndex = 3;
             rtxIgnore.Text = "";
             // 
             // btnMerge
             // 
             btnMerge.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnMerge.Location = new Point(455, 223);
+            btnMerge.Location = new Point(391, 307);
             btnMerge.Name = "btnMerge";
-            btnMerge.Size = new Size(75, 43);
+            btnMerge.Size = new Size(142, 22);
             btnMerge.TabIndex = 7;
             btnMerge.Text = "Merge";
             btnMerge.UseVisualStyleBackColor = true;
@@ -118,7 +121,7 @@
             rtxFilesContent.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rtxFilesContent.Location = new Point(3, 19);
             rtxFilesContent.Name = "rtxFilesContent";
-            rtxFilesContent.Size = new Size(431, 180);
+            rtxFilesContent.Size = new Size(367, 180);
             rtxFilesContent.TabIndex = 11;
             rtxFilesContent.Text = "";
             rtxFilesContent.WordWrap = false;
@@ -137,7 +140,7 @@
             // splMain.Panel2
             // 
             splMain.Panel2.Controls.Add(gbxFilesContent);
-            splMain.Size = new Size(437, 384);
+            splMain.Size = new Size(373, 384);
             splMain.SplitterDistance = 178;
             splMain.TabIndex = 12;
             // 
@@ -154,8 +157,8 @@
             // splTop.Panel2
             // 
             splTop.Panel2.Controls.Add(gbxFilePath);
-            splTop.Size = new Size(437, 178);
-            splTop.SplitterDistance = 203;
+            splTop.Size = new Size(373, 178);
+            splTop.SplitterDistance = 173;
             splTop.TabIndex = 12;
             // 
             // tlpnlExcludeSummary
@@ -172,7 +175,7 @@
             tlpnlExcludeSummary.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpnlExcludeSummary.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tlpnlExcludeSummary.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tlpnlExcludeSummary.Size = new Size(203, 178);
+            tlpnlExcludeSummary.Size = new Size(173, 178);
             tlpnlExcludeSummary.TabIndex = 10;
             // 
             // gbxIgnore
@@ -181,7 +184,7 @@
             gbxIgnore.Dock = DockStyle.Fill;
             gbxIgnore.Location = new Point(3, 3);
             gbxIgnore.Name = "gbxIgnore";
-            gbxIgnore.Size = new Size(197, 83);
+            gbxIgnore.Size = new Size(167, 83);
             gbxIgnore.TabIndex = 13;
             gbxIgnore.TabStop = false;
             gbxIgnore.Text = "Ignore";
@@ -192,7 +195,7 @@
             gbxSummary.Dock = DockStyle.Fill;
             gbxSummary.Location = new Point(3, 92);
             gbxSummary.Name = "gbxSummary";
-            gbxSummary.Size = new Size(197, 83);
+            gbxSummary.Size = new Size(167, 83);
             gbxSummary.TabIndex = 14;
             gbxSummary.TabStop = false;
             gbxSummary.Text = "Summary";
@@ -203,7 +206,7 @@
             txtSummary.Location = new Point(3, 19);
             txtSummary.Multiline = true;
             txtSummary.Name = "txtSummary";
-            txtSummary.Size = new Size(191, 61);
+            txtSummary.Size = new Size(161, 61);
             txtSummary.TabIndex = 9;
             // 
             // gbxFilePath
@@ -212,19 +215,18 @@
             gbxFilePath.Dock = DockStyle.Fill;
             gbxFilePath.Location = new Point(0, 0);
             gbxFilePath.Name = "gbxFilePath";
-            gbxFilePath.Size = new Size(230, 178);
+            gbxFilePath.Size = new Size(196, 178);
             gbxFilePath.TabIndex = 13;
             gbxFilePath.TabStop = false;
             gbxFilePath.Text = "FilePath";
             // 
             // clstFilePath
             // 
-            clstFilePath.CheckOnClick = true;
             clstFilePath.Dock = DockStyle.Fill;
             clstFilePath.FormattingEnabled = true;
             clstFilePath.Location = new Point(3, 19);
             clstFilePath.Name = "clstFilePath";
-            clstFilePath.Size = new Size(224, 156);
+            clstFilePath.Size = new Size(190, 156);
             clstFilePath.TabIndex = 13;
             clstFilePath.ItemCheck += ClstFilePath_ItemCheck;
             // 
@@ -234,7 +236,7 @@
             gbxFilesContent.Dock = DockStyle.Fill;
             gbxFilesContent.Location = new Point(0, 0);
             gbxFilesContent.Name = "gbxFilesContent";
-            gbxFilesContent.Size = new Size(437, 202);
+            gbxFilesContent.Size = new Size(373, 202);
             gbxFilesContent.TabIndex = 13;
             gbxFilesContent.TabStop = false;
             gbxFilesContent.Text = "FilesContent";
@@ -242,31 +244,43 @@
             // btnClearSelect
             // 
             btnClearSelect.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnClearSelect.Location = new Point(455, 122);
+            btnClearSelect.Location = new Point(391, 194);
             btnClearSelect.Name = "btnClearSelect";
-            btnClearSelect.Size = new Size(75, 55);
+            btnClearSelect.Size = new Size(142, 22);
             btnClearSelect.TabIndex = 13;
-            btnClearSelect.Text = "Clear\r\nSelect";
+            btnClearSelect.Text = "Clear Select";
             btnClearSelect.UseVisualStyleBackColor = true;
             btnClearSelect.Click += BtnClearSelect_Click;
             // 
-            // btnCopyAll
+            // btnCopyIntoClipboard
             // 
-            btnCopyAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCopyAll.Location = new Point(455, 272);
-            btnCopyAll.Name = "btnCopyAll";
-            btnCopyAll.Size = new Size(75, 43);
-            btnCopyAll.TabIndex = 14;
-            btnCopyAll.Text = "CopyAll";
-            btnCopyAll.UseVisualStyleBackColor = true;
-            btnCopyAll.Click += BtnCopyAll_Click;
+            btnCopyIntoClipboard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnCopyIntoClipboard.Location = new Point(391, 400);
+            btnCopyIntoClipboard.Name = "btnCopyIntoClipboard";
+            btnCopyIntoClipboard.Size = new Size(142, 22);
+            btnCopyIntoClipboard.TabIndex = 14;
+            btnCopyIntoClipboard.Text = "Copy Into Clipboard";
+            btnCopyIntoClipboard.UseVisualStyleBackColor = true;
+            btnCopyIntoClipboard.Click += BtnCopyIntoClipboard_Click;
+            // 
+            // btnSelectAll
+            // 
+            btnSelectAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSelectAll.Location = new Point(391, 165);
+            btnSelectAll.Name = "btnSelectAll";
+            btnSelectAll.Size = new Size(142, 22);
+            btnSelectAll.TabIndex = 13;
+            btnSelectAll.Text = "Select All";
+            btnSelectAll.UseVisualStyleBackColor = true;
+            btnSelectAll.Click += BtnSelectAll_Click;
             // 
             // FileMerger
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(542, 437);
-            Controls.Add(btnCopyAll);
+            Controls.Add(btnCopyIntoClipboard);
+            Controls.Add(btnSelectAll);
             Controls.Add(btnClearSelect);
             Controls.Add(splMain);
             Controls.Add(btnMerge);
@@ -311,8 +325,9 @@
         private GroupBox gbxSummary;
         private GroupBox gbxFilePath;
         private GroupBox gbxFilesContent;
-        private CheckedListBox clstFilePath;
+        private CustomCheckedListBox clstFilePath;
         private Button btnClearSelect;
-        private Button btnCopyAll;
+        private Button btnCopyIntoClipboard;
+        private Button btnSelectAll;
     }
 }

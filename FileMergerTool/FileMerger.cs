@@ -65,6 +65,18 @@ namespace FileMergerTool
             ScanFiles();
         }
 
+        private void BtnSelectAll_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < clstFilePath.Items.Count; i++)
+            {
+                clstFilePath.SetItemChecked(i, true);
+                string path = clstFilePath.Items[i]?.ToString() ?? "empty";
+                fileList.Add(new FileInfo(path));
+            }
+
+            UpdateSummary();
+        }
+
         /// <summary>
         /// Clears the selected files in the checklist and updates the summary.
         /// </summary>
@@ -86,11 +98,9 @@ namespace FileMergerTool
             var sb = new StringBuilder();
             fileList.ForEach(f =>
             {
-                sb.AppendLine($"================================================");
-                sb.AppendLine($"FILE: {f.FullName}");
-                sb.AppendLine($"================================================");
+                sb.AppendLine($"=== FILE: {f.FullName} ===");
                 sb.AppendLine(File.ReadAllText(f.FullName));
-                sb.AppendLine($"================================================");
+                sb.AppendLine($"=== END_OF_FILE ===");
             });
 
             rtxFilesContent.Text = sb.ToString();
@@ -99,7 +109,7 @@ namespace FileMergerTool
         /// <summary>
         /// Copies the merged file content to the clipboard and shows a summary of the copied text.
         /// </summary>
-        private void BtnCopyAll_Click(object sender, EventArgs e)
+        private void BtnCopyIntoClipboard_Click(object sender, EventArgs e)
         {
             try
             {
@@ -178,6 +188,9 @@ obj/
 .pdb
 .ini
 .exe
+.png
+.bmp
+.jpeg
 .xlsx";
             }
         }
