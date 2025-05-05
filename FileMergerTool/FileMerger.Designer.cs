@@ -31,7 +31,6 @@ namespace FileMergerTool
         private void InitializeComponent()
         {
             txtFolderPath = new TextBox();
-            btnImportFiles = new Button();
             btnOpen = new Button();
             rtxIgnore = new RichTextBox();
             btnMerge = new Button();
@@ -48,6 +47,7 @@ namespace FileMergerTool
             btnClearSelect = new Button();
             btnCopyIntoClipboard = new Button();
             btnSelectAll = new Button();
+            btnSaveMergedFile = new Button();
             ((System.ComponentModel.ISupportInitialize)splMain).BeginInit();
             splMain.Panel1.SuspendLayout();
             splMain.Panel2.SuspendLayout();
@@ -68,24 +68,13 @@ namespace FileMergerTool
             txtFolderPath.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             txtFolderPath.Location = new Point(12, 12);
             txtFolderPath.Name = "txtFolderPath";
-            txtFolderPath.Size = new Size(437, 23);
+            txtFolderPath.Size = new Size(629, 23);
             txtFolderPath.TabIndex = 0;
-            // 
-            // btnImportFiles
-            // 
-            btnImportFiles.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnImportFiles.Location = new Point(391, 61);
-            btnImportFiles.Name = "btnImportFiles";
-            btnImportFiles.Size = new Size(142, 22);
-            btnImportFiles.TabIndex = 1;
-            btnImportFiles.Text = "Import Files";
-            btnImportFiles.UseVisualStyleBackColor = true;
-            btnImportFiles.Click += BtnImportFiles_Click;
             // 
             // btnOpen
             // 
             btnOpen.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnOpen.Location = new Point(455, 12);
+            btnOpen.Location = new Point(647, 12);
             btnOpen.Name = "btnOpen";
             btnOpen.Size = new Size(75, 23);
             btnOpen.TabIndex = 2;
@@ -99,16 +88,16 @@ namespace FileMergerTool
             rtxIgnore.Dock = DockStyle.Fill;
             rtxIgnore.Location = new Point(3, 19);
             rtxIgnore.Name = "rtxIgnore";
-            rtxIgnore.Size = new Size(161, 61);
+            rtxIgnore.Size = new Size(250, 61);
             rtxIgnore.TabIndex = 3;
             rtxIgnore.Text = "";
             // 
             // btnMerge
             // 
             btnMerge.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnMerge.Location = new Point(391, 307);
+            btnMerge.Location = new Point(583, 90);
             btnMerge.Name = "btnMerge";
-            btnMerge.Size = new Size(142, 22);
+            btnMerge.Size = new Size(142, 23);
             btnMerge.TabIndex = 7;
             btnMerge.Text = "Merge";
             btnMerge.UseVisualStyleBackColor = true;
@@ -121,7 +110,7 @@ namespace FileMergerTool
             rtxFilesContent.Font = new Font("Consolas", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             rtxFilesContent.Location = new Point(3, 19);
             rtxFilesContent.Name = "rtxFilesContent";
-            rtxFilesContent.Size = new Size(367, 180);
+            rtxFilesContent.Size = new Size(559, 180);
             rtxFilesContent.TabIndex = 11;
             rtxFilesContent.Text = "";
             rtxFilesContent.WordWrap = false;
@@ -140,7 +129,7 @@ namespace FileMergerTool
             // splMain.Panel2
             // 
             splMain.Panel2.Controls.Add(gbxFilesContent);
-            splMain.Size = new Size(373, 384);
+            splMain.Size = new Size(565, 384);
             splMain.SplitterDistance = 178;
             splMain.TabIndex = 12;
             // 
@@ -157,8 +146,8 @@ namespace FileMergerTool
             // splTop.Panel2
             // 
             splTop.Panel2.Controls.Add(gbxFilePath);
-            splTop.Size = new Size(373, 178);
-            splTop.SplitterDistance = 173;
+            splTop.Size = new Size(565, 178);
+            splTop.SplitterDistance = 262;
             splTop.TabIndex = 12;
             // 
             // tlpnlExcludeSummary
@@ -175,7 +164,7 @@ namespace FileMergerTool
             tlpnlExcludeSummary.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tlpnlExcludeSummary.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tlpnlExcludeSummary.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
-            tlpnlExcludeSummary.Size = new Size(173, 178);
+            tlpnlExcludeSummary.Size = new Size(262, 178);
             tlpnlExcludeSummary.TabIndex = 10;
             // 
             // gbxIgnore
@@ -184,7 +173,7 @@ namespace FileMergerTool
             gbxIgnore.Dock = DockStyle.Fill;
             gbxIgnore.Location = new Point(3, 3);
             gbxIgnore.Name = "gbxIgnore";
-            gbxIgnore.Size = new Size(167, 83);
+            gbxIgnore.Size = new Size(256, 83);
             gbxIgnore.TabIndex = 13;
             gbxIgnore.TabStop = false;
             gbxIgnore.Text = "Ignore";
@@ -195,7 +184,7 @@ namespace FileMergerTool
             gbxSummary.Dock = DockStyle.Fill;
             gbxSummary.Location = new Point(3, 92);
             gbxSummary.Name = "gbxSummary";
-            gbxSummary.Size = new Size(167, 83);
+            gbxSummary.Size = new Size(256, 83);
             gbxSummary.TabIndex = 14;
             gbxSummary.TabStop = false;
             gbxSummary.Text = "Summary";
@@ -206,7 +195,7 @@ namespace FileMergerTool
             txtSummary.Location = new Point(3, 19);
             txtSummary.Multiline = true;
             txtSummary.Name = "txtSummary";
-            txtSummary.Size = new Size(161, 61);
+            txtSummary.Size = new Size(250, 61);
             txtSummary.TabIndex = 9;
             // 
             // gbxFilePath
@@ -215,7 +204,7 @@ namespace FileMergerTool
             gbxFilePath.Dock = DockStyle.Fill;
             gbxFilePath.Location = new Point(0, 0);
             gbxFilePath.Name = "gbxFilePath";
-            gbxFilePath.Size = new Size(196, 178);
+            gbxFilePath.Size = new Size(299, 178);
             gbxFilePath.TabIndex = 13;
             gbxFilePath.TabStop = false;
             gbxFilePath.Text = "FilePath";
@@ -226,7 +215,7 @@ namespace FileMergerTool
             clstFilePath.FormattingEnabled = true;
             clstFilePath.Location = new Point(3, 19);
             clstFilePath.Name = "clstFilePath";
-            clstFilePath.Size = new Size(190, 156);
+            clstFilePath.Size = new Size(293, 156);
             clstFilePath.TabIndex = 13;
             clstFilePath.ItemCheck += ClstFilePath_ItemCheck;
             // 
@@ -236,7 +225,7 @@ namespace FileMergerTool
             gbxFilesContent.Dock = DockStyle.Fill;
             gbxFilesContent.Location = new Point(0, 0);
             gbxFilesContent.Name = "gbxFilesContent";
-            gbxFilesContent.Size = new Size(373, 202);
+            gbxFilesContent.Size = new Size(565, 202);
             gbxFilesContent.TabIndex = 13;
             gbxFilesContent.TabStop = false;
             gbxFilesContent.Text = "FilesContent";
@@ -244,9 +233,9 @@ namespace FileMergerTool
             // btnClearSelect
             // 
             btnClearSelect.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnClearSelect.Location = new Point(391, 194);
+            btnClearSelect.Location = new Point(583, 194);
             btnClearSelect.Name = "btnClearSelect";
-            btnClearSelect.Size = new Size(142, 22);
+            btnClearSelect.Size = new Size(142, 23);
             btnClearSelect.TabIndex = 13;
             btnClearSelect.Text = "Clear Select";
             btnClearSelect.UseVisualStyleBackColor = true;
@@ -255,9 +244,9 @@ namespace FileMergerTool
             // btnCopyIntoClipboard
             // 
             btnCopyIntoClipboard.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnCopyIntoClipboard.Location = new Point(391, 400);
+            btnCopyIntoClipboard.Location = new Point(583, 400);
             btnCopyIntoClipboard.Name = "btnCopyIntoClipboard";
-            btnCopyIntoClipboard.Size = new Size(142, 22);
+            btnCopyIntoClipboard.Size = new Size(142, 23);
             btnCopyIntoClipboard.TabIndex = 14;
             btnCopyIntoClipboard.Text = "Copy Into Clipboard";
             btnCopyIntoClipboard.UseVisualStyleBackColor = true;
@@ -266,26 +255,37 @@ namespace FileMergerTool
             // btnSelectAll
             // 
             btnSelectAll.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            btnSelectAll.Location = new Point(391, 165);
+            btnSelectAll.Location = new Point(583, 165);
             btnSelectAll.Name = "btnSelectAll";
-            btnSelectAll.Size = new Size(142, 22);
+            btnSelectAll.Size = new Size(142, 23);
             btnSelectAll.TabIndex = 13;
             btnSelectAll.Text = "Select All";
             btnSelectAll.UseVisualStyleBackColor = true;
             btnSelectAll.Click += BtnSelectAll_Click;
             // 
+            // btnSaveMergedFile
+            // 
+            btnSaveMergedFile.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnSaveMergedFile.Location = new Point(583, 307);
+            btnSaveMergedFile.Name = "btnSaveMergedFile";
+            btnSaveMergedFile.Size = new Size(142, 23);
+            btnSaveMergedFile.TabIndex = 15;
+            btnSaveMergedFile.Text = "Save Merged File";
+            btnSaveMergedFile.UseVisualStyleBackColor = true;
+            btnSaveMergedFile.Click += BtnSaveMergedFile_Click;
+            // 
             // FileMerger
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(542, 437);
+            ClientSize = new Size(734, 437);
+            Controls.Add(btnSaveMergedFile);
             Controls.Add(btnCopyIntoClipboard);
             Controls.Add(btnSelectAll);
             Controls.Add(btnClearSelect);
             Controls.Add(splMain);
             Controls.Add(btnMerge);
             Controls.Add(btnOpen);
-            Controls.Add(btnImportFiles);
             Controls.Add(txtFolderPath);
             Name = "FileMerger";
             Text = "FileMerger";
@@ -311,10 +311,8 @@ namespace FileMergerTool
         #endregion
 
         private TextBox txtFolderPath;
-        private Button btnImportFiles;
         private Button btnOpen;
         private RichTextBox rtxIgnore;
-        private RichTextBox txtPathTree;
         private Button btnMerge;
         private RichTextBox rtxFilesContent;
         private SplitContainer splMain;
@@ -329,5 +327,6 @@ namespace FileMergerTool
         private Button btnClearSelect;
         private Button btnCopyIntoClipboard;
         private Button btnSelectAll;
+        private Button btnSaveMergedFile;
     }
 }

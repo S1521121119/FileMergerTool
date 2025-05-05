@@ -54,6 +54,7 @@ namespace FileMergerTool
             if (folderDialog.ShowDialog() == DialogResult.OK)
             {
                 txtFolderPath.Text = folderDialog.SelectedPath;
+                ScanFiles();
             }
         }
 
@@ -62,7 +63,7 @@ namespace FileMergerTool
         /// </summary>
         private void BtnImportFiles_Click(object sender, EventArgs e)
         {
-            ScanFiles();
+          
         }
 
         private void BtnSelectAll_Click(object sender, EventArgs e)
@@ -104,6 +105,19 @@ namespace FileMergerTool
             });
 
             rtxFilesContent.Text = sb.ToString();
+        }
+
+        private void BtnSaveMergedFile_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(rtxFilesContent?.Text)) return;
+
+            using SaveFileDialog saveFileDialog = new();
+            saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+            saveFileDialog.FileName = "merged_output.txt";
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllText(saveFileDialog.FileName, rtxFilesContent.Text);
+            }
         }
 
         /// <summary>
